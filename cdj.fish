@@ -4,7 +4,13 @@ function cdj
 
     if test (count $argv) -eq 1
         # Single argument: navigate to ID folder
-        set matches $jd_root/*/*/$argv[1]*/
+        # Detect ID type: 4+ digits = expanded area (2 levels), otherwise standard (3 levels)
+        if string match -qr '^\d{4,}$' $argv[1]
+            set matches $jd_root/*/$argv[1]*/
+        else
+            set matches $jd_root/*/*/$argv[1]*/
+        end
+
         if test (count $matches) -eq 1
             cd $matches[1]
         else if test (count $matches) -gt 1
@@ -17,8 +23,13 @@ function cdj
         end
     else if test (count $argv) -eq 2
         # Two arguments: navigate to specific subfolder (case-insensitive)
-        # Fish doesn't have native case-insensitive globbing, so we'll use find
-        set id_match $jd_root/*/*/$argv[1]*/
+        # Detect ID type: 4+ digits = expanded area (2 levels), otherwise standard (3 levels)
+        if string match -qr '^\d{4,}$' $argv[1]
+            set id_match $jd_root/*/$argv[1]*/
+        else
+            set id_match $jd_root/*/*/$argv[1]*/
+        end
+
         if test (count $id_match) -eq 0
             echo "No ID matches found for: $argv[1]"
             return 1
