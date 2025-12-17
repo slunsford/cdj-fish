@@ -2,6 +2,9 @@ function cdj
     # Update with your document root folder
     set jd_root ~/Documents/JD
 
+    argparse 'o/open' -- $argv
+    or return 1
+
     if test (count $argv) -eq 1
         # Single argument: navigate to ID folder
         # Detect ID type: 4+ digits = expanded area (2 levels), otherwise standard (3 levels)
@@ -13,6 +16,9 @@ function cdj
 
         if test (count $matches) -eq 1
             cd $matches[1]
+            if set -q _flag_open
+                open .
+            end
         else if test (count $matches) -gt 1
             echo "Multiple matches found:"
             printf '%s\n' $matches
@@ -38,12 +44,15 @@ function cdj
         set matches (find $id_match[1] -maxdepth 2 -type d -iname "*$argv[2]*" 2>/dev/null | head -n 1)
         if test -n "$matches"
             cd $matches
+            if set -q _flag_open
+                open .
+            end
         else
             echo "No subfolder matches found for: $argv[2]"
             return 1
         end
     else
-        echo "Usage: cdj <ID> [subfolder]"
+        echo "Usage: cdj [-o|--open] <ID> [subfolder]"
         return 1
     end
 end
