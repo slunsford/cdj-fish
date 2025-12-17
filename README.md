@@ -31,3 +31,9 @@ Supports both standard IDs and [expanded area IDs](https://johnnydecimal.com/10-
 cdj 90001          # 4+ digit expanded area ID
 cdj 90001 audio    # subfolder within expanded ID
 ```
+
+Open the folder in Finder (in addition to navigating):
+```fish
+cdj -o 11.21
+cdj --open 11.21 docs
+```
