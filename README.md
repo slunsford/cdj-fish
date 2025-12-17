@@ -18,12 +18,12 @@ A fish port of the [cdj](https://johnnydecimal.com/22.00.0172/) script for navig
 
 Navigate to an ID folder:
 ```fish
-cdj 11.21
+cdj 15.52
 ```
 
 Navigate to a subfolder within an ID (case-insensitive search):
 ```fish
-cdj 11.21 docs
+cdj 15.52 visas
 ```
 
 Supports both standard IDs and [expanded area IDs](https://johnnydecimal.com/10-19-concepts/13-system-expansion/13.21-expand-an-area/):
@@ -34,6 +34,6 @@ cdj 90001 audio    # subfolder within expanded ID
 
 Open the folder in Finder (in addition to navigating):
 ```fish
-cdj -o 11.21
-cdj --open 11.21 docs
+cdj -o 15.52
+cdj --open 15.52 visas
 ```
